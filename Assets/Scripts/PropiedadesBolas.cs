@@ -6,12 +6,16 @@ public class PropiedadesBolas : MonoBehaviour
     /*Cada prefab tiene una propiedad diferente, es decir, al tocar una bola la hacen desaparecer o la echan volando por los aires.
     o hacen que empiece a botar, o le dan un movimiento ocn una velocidad... esa propiedad se recibe de forma aleatoria y tiene un color propio.*/
     //ATRIBUTOS: -----------------------------------
-
-    //Atributos propiedades bolas:
-    private Action[] propiedades = new Action[5];
+    //Públicos
+    [HideInInspector]
+    public int indicePropiedadElegida;
+    public Action propiedadAsociada;
+    //Privados
+    private Action[] propiedades = new Action[6];
     private Renderer colorVariable;
 
-    //MÉTODOS: -------------------------------------
+
+    //MÉTODOS BÁSICOS: -------------------------------------
     private void Awake()
     {
         colorVariable = GetComponent<Renderer>();
@@ -19,22 +23,19 @@ public class PropiedadesBolas : MonoBehaviour
     }
     private void Start()
     {
-        Tamaño();
-        ColorBola();
+        TamañoYColor();
     }
 
-    void Tamaño()
+    //MÉTODOS AVANZADOS: -------------------------------------
+
+    void TamañoYColor()
     {
         float tamañoBola = UnityEngine.Random.Range(1f, 3f);
         transform.localScale = new Vector3(tamañoBola, tamañoBola, tamañoBola);
-    }
-
-    void ColorBola()
-    {
         colorVariable.material.color = new Color32((byte)UnityEngine.Random.Range(0, 256), (byte)UnityEngine.Random.Range(0, 256), (byte)UnityEngine.Random.Range(0, 256), 255);
     }
-
-    void AsignacionDePropiedades()
+     
+    public void AsignacionDePropiedades()
     {
         propiedades[0] = PropiedadBurbuja;
         propiedades[1] = PropiedadExplosion;
@@ -42,9 +43,12 @@ public class PropiedadesBolas : MonoBehaviour
         propiedades[3] = Botar;
         propiedades[4] = MovimientoExtra;
         propiedades[5] = GameOver;
+
+        indicePropiedadElegida = UnityEngine.Random.Range(0, propiedades.Length);
+        propiedadAsociada = propiedades[indicePropiedadElegida];
     }
 
-    //MÉTODOS PROPIEDADES BOLAS: --------------------------------------------
+    //MÉTODOS AVANZADOS PROPIEDADES BOLAS: --------------------------------------------
 
     //toda bola que toque levitará:
     void PropiedadBurbuja()

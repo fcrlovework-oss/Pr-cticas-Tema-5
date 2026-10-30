@@ -35,7 +35,6 @@ public class DataKPIPiscinaBolas : MonoBehaviour
     {
         if (archivoDatos != null)
         {
-            Debug.Log("Dato recibido: " + datoRecogido);
             archivoDatos.TomaDeDatosBasicos(datoRecogido);
         }
     }
@@ -44,7 +43,6 @@ public class DataKPIPiscinaBolas : MonoBehaviour
     {
         if (archivoDatos != null)
         {
-            Debug.Log("Dato recibido: " + datoEnum);
             archivoDatos.TomaDeDatosPropiedades(datoEnum);
         }
     }

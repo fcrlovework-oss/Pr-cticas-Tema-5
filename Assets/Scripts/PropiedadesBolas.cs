@@ -5,18 +5,20 @@ public class PropiedadesBolas : MonoBehaviour
 {
     /*Cada prefab tiene una propiedad diferente, es decir, al tocar una bola la hacen desaparecer o la echan volando por los aires.
     o hacen que empiece a botar, o le dan un movimiento ocn una velocidad... esa propiedad se recibe de forma aleatoria y tiene un color propio.*/
-    //ATRIBUTOS: -----------------------------------
-    //Atributos para registro de datos:
-    private DataKPIPiscinaBolas KPIPropiedadesBolas;
+    //ATRIBUTOS: --------------------------------------------------
 
-    //Atributos para Propiedades:
+    //Atributos privados Propiedades:
+    private Action[] propiedades = new Action[6];
+    private Renderer colorVariable;
     private InstanciarPrefabs instanciacionBolas;
     private ColisionesBolas deteccionColisiones;
     private Rigidbody rbBola;
-    
-    //Públicos
+
+    //Atributos publicos Propiedades:
     [HideInInspector]
     public int indicePropiedadElegida;
+    [HideInInspector]
+    public bool finAceleracion;
     [HideInInspector]
     public int? indicePropiedadContraida = null;
     public GameObject explosionBurbujas;
@@ -25,13 +27,11 @@ public class PropiedadesBolas : MonoBehaviour
     public GameObject explosionAceleracion;
     public GameObject explosionBotar;
     public GameObject explosionMovimientoExtra;
-
     public Action propiedadAsociada;
 
-    //Privados
-    private Action[] propiedades = new Action[6];
-    private Renderer colorVariable;
-
+    //Atributos para registro de datos:
+    private DataKPIPiscinaBolas KPIPropiedadesBolas;
+   
 
     //MÉTODOS BÁSICOS: -------------------------------------
     private void Awake()
@@ -51,6 +51,8 @@ public class PropiedadesBolas : MonoBehaviour
     private void Update()
     {
         AfeccionPropiedades();
+        if(propiedadAsociada == AceleracionCreacionBolas) AceleracionCreacionBolas();
+        if(propiedadAsociada == GameOver) GameOver();
     }
 
     //MÉTODOS AVANZADOS: -------------------------------------
@@ -102,11 +104,9 @@ public class PropiedadesBolas : MonoBehaviour
     //toda bola que toque levitará:
     public void PropiedadBurbuja()
     {
-        Debug.Log("Has sufrido la propiedad Burbuja");
-
         rbBola.useGravity = false;
         rbBola.linearDamping = 1f;
-        rbBola.AddForce(Vector3.up * 5f,ForceMode.Impulse);
+        rbBola.AddForce(Vector3.up * 15f,ForceMode.Impulse);
     }
 
     //Hace explotar las bolas que toca
@@ -118,6 +118,7 @@ public class PropiedadesBolas : MonoBehaviour
         if(indicePropiedadElegida == 3) Instantiate(explosionBotar, transform.position, Quaternion.identity);
         if(indicePropiedadElegida == 4) Instantiate(explosionMovimientoExtra, transform.position, Quaternion.identity);
         if(indicePropiedadElegida == 5) Instantiate(explosionGameOvers, transform.position, Quaternion.identity);
+        instanciacionBolas.EliminacionBolasListas(this.gameObject);
         Destroy(this.gameObject);
 
     }
@@ -125,7 +126,22 @@ public class PropiedadesBolas : MonoBehaviour
     //acelera el tiempo de creacion de bolas cuando pulsas sobre ella.
     void AceleracionCreacionBolas()
     {
-        
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.rigidbody == rbBola)
+                {
+                    if(instanciacionBolas.AceleracionInstancias != true)
+                    { 
+                        instanciacionBolas.AceleracionInstancias = true;
+                    }
+                }
+            }
+        }
+        if (finAceleracion) PropiedadExplosion();
     }
 
     //hace botar la bola un tiempo:
@@ -134,7 +150,6 @@ public class PropiedadesBolas : MonoBehaviour
         if(deteccionColisiones.detectoSuelo == true)
         {
             float impulsoBote = UnityEngine.Random.Range(5f, 10f);
-            Debug.Log("Has sufrido la propiedad Botar");
             rbBola.AddForce(Vector3.up * impulsoBote, ForceMode.Impulse);
             deteccionColisiones.detectoSuelo = false;
         }
@@ -143,19 +158,29 @@ public class PropiedadesBolas : MonoBehaviour
     //da un movimiento aleatorio constante y velocidad a las bolas que toca:
     void MovimientoExtra()
     {
-
+        Vector3[] Vectores = {Vector3.forward, -Vector3.forward, Vector3.right, -Vector3.right};
+        int VectorElegido = UnityEngine.Random.Range(0, Vectores.Length);
+        Vector3 VectorAleatorio = Vectores[VectorElegido];
+        rbBola.AddForce(VectorAleatorio * 5f, ForceMode.Force);
     }
 
     //si pulsas esta bola sin querer, pierdes una vida y hará explotar todas las bolas de la piscina, cuando tus vidas lleguen a cero, se acaba el juego.
     void GameOver()
     {
-
-    }
-
-    //hare que si un bola con x propiedad toca a otra con x propiedad o y propiedad, ganas x o y dinero. quiero poder registrar el dinero maximo ganado en cada partida.
-    void Recompensas() //quiero pensar en si debo hacer este metodo en un script diferente.
-    {
-
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.rigidbody == rbBola)
+                {
+                    Debug.Log("Has perdido una vida, te quedan " + VidaYRecompensas.vidaJuego);
+                    VidaYRecompensas.vidaJuego--;
+                    PropiedadExplosion();
+                }
+            }
+        }
     }
 
 }

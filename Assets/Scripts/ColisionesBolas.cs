@@ -9,6 +9,8 @@ public class ColisionesBolas : MonoBehaviour
     //Atributos para colisiones bolas:
     private PropiedadesBolas datosBolaActual;
     private PropiedadesBolas datosBolaChocada;
+    private InstanciarPrefabs datosBolaDestruida;
+
     private int indicePropiedad;
 
     [HideInInspector]
@@ -62,6 +64,7 @@ public class ColisionesBolas : MonoBehaviour
         }
         if (indicePropiedad == 1) datosBolaChocada.PropiedadExplosion();
         if (indicePropiedad == 3) datosBolaChocada.indicePropiedadContraida = 3;
+        if (indicePropiedad == 4) datosBolaChocada.indicePropiedadContraida = 4;
     }
         
 }

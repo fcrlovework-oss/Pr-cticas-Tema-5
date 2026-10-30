@@ -40,7 +40,6 @@ public class DataControllerPiscinaBolas : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("OnDestroy se ha ejecutado");
         bucket.Save(Application.dataPath + "/DatosPiscinaBolas.json");
     }
 

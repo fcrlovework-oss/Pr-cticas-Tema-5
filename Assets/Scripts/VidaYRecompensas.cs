@@ -7,10 +7,10 @@ public class VidaYRecompensas : MonoBehaviour
     //Atributos publicos:
     [HideInInspector]
     static public int vidaJuego = 5;
-
+    [HideInInspector]
+    static public int dineroJuego;
 
     //Atributos privados:
-    int dineroJuego;
     PropiedadesBolas lecturaBolas;
 
     //MÉTODOS BÁSICOS: -------------------------------------
@@ -18,6 +18,7 @@ public class VidaYRecompensas : MonoBehaviour
     private void Start()
     {
         Debug.Log("Consigue 100 monedas para ganar el juego");
+        Debug.Log("Pistas: las bolas que hacen explotar, acelerar las instancias y perder  quitan dinero.");
     }
 
     private void Update()
@@ -52,43 +53,19 @@ public class VidaYRecompensas : MonoBehaviour
 
     void Recompensas()
     {
-        if(lecturaBolas.indicePropiedadElegida == 0) //burbuja
+        if(lecturaBolas.indicePropiedadElegida == 0 || lecturaBolas.indicePropiedadElegida == 3 || lecturaBolas.indicePropiedadElegida == 4) //burbuja, Botar, movimientoExtra
         {
             dineroJuego += 10;
             Debug.Log("¡Has ganado 10 monedas!");
+            lecturaBolas.PropiedadExplosion();
         }
 
         if (lecturaBolas.indicePropiedadElegida == 1) //Explosion
         {
             dineroJuego -= 5;
             Debug.Log("Perdiste 5 monedas...");
+            lecturaBolas.PropiedadExplosion();
         }
-
-        if (lecturaBolas.indicePropiedadElegida == 2) //Aceleracion
-        {
-            dineroJuego -= 15;
-            Debug.Log("Perdiste 15 monedas...");
-        }
-
-        if (lecturaBolas.indicePropiedadElegida == 3) //Botar
-        {
-            dineroJuego += 10;
-            Debug.Log("¡Has ganado 10 monedas!");
-        }
-
-        if (lecturaBolas.indicePropiedadElegida == 4) //movimientoExtra
-        {
-            dineroJuego += 10;
-            Debug.Log("¡Has ganado 10 monedas!");
-        }
-
-        if (lecturaBolas.indicePropiedadElegida == 5) //GameOver
-        {
-            dineroJuego -= 20;
-            Debug.Log("Perdiste 20 monedas...");
-        }
-
-        lecturaBolas.PropiedadExplosion();
         Debug.Log("Tienes " + dineroJuego + " monedas.");
     }
 

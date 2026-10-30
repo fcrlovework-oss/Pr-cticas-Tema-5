@@ -141,7 +141,13 @@ public class PropiedadesBolas : MonoBehaviour
                 }
             }
         }
-        if (finAceleracion) PropiedadExplosion();
+        if (finAceleracion)
+        {
+            PropiedadExplosion();
+            VidaYRecompensas.dineroJuego -= 15;
+            Debug.Log("Perdiste 15 monedas...");
+        }
+            
     }
 
     //hace botar la bola un tiempo:
@@ -175,8 +181,9 @@ public class PropiedadesBolas : MonoBehaviour
             {
                 if(hit.rigidbody == rbBola)
                 {
-                    Debug.Log("Has perdido una vida, te quedan " + VidaYRecompensas.vidaJuego);
+                    Debug.Log("Has perdido una vida y 20 monedas, te quedan " + VidaYRecompensas.vidaJuego + " vidas y " + VidaYRecompensas.dineroJuego);
                     VidaYRecompensas.vidaJuego--;
+                    VidaYRecompensas.dineroJuego -= 20;
                     PropiedadExplosion();
                 }
             }

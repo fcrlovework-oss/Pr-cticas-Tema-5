@@ -1,0 +1,10 @@
+{
+    "CountBolasTotalesKPI": 109,
+    "CountColisionesTotalesBolasKPI": 0,
+    "CountBolasPropiedadBurbujaKPI": 17,
+    "CountBolasPropiedadExplosionKPI": 16,
+    "CountBolasPropiedadAceleracionKPI": 22,
+    "CountBolasPropiedadBotarKPI": 27,
+    "CountBolasPropiedadMovimientoExtraKPI": 12,
+    "CountBolasPropiedadGameOverKPI": 16
+}

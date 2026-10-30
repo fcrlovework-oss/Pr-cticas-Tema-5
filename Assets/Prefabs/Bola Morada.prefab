@@ -10,13 +10,15 @@ GameObject:
   m_Component:
   - component: {fileID: 2286969372419218946}
   - component: {fileID: 9154102248265103587}
+  - component: {fileID: 4296083146989496463}
   - component: {fileID: 5722686412238331015}
+  - component: {fileID: 7962623792927839574}
   - component: {fileID: 8188322067710856561}
   - component: {fileID: 5253421566930873291}
   - component: {fileID: 3633446969610201771}
   m_Layer: 0
   m_Name: Bola Morada
-  m_TagString: Untagged
+  m_TagString: bola
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,6 +46,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6501862549949007281}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4296083146989496463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6501862549949007281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948e56c958c6129458522c97558c445f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataKPIPiscinaBolas
+  datoRecogido: 1
 --- !u!114 &5722686412238331015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56,6 +71,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e1410dba94fbb647a11ee185b5eb49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PropiedadesBolas
+  explosionBurbujas: {fileID: 8791802859087666345, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
+  explosionGameOvers: {fileID: 4593184484909914552, guid: 2e1e9506f5904a64b81744324fb7cd50, type: 3}
+  explosionExplosion: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  explosionAceleracion: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  explosionBotar: {fileID: 8791802859087666345, guid: ae07f2a45f14a82428409cfe410e6002, type: 3}
+  explosionMovimientoExtra: {fileID: 2433282508537954060, guid: 3ef3ae421f71c5c4e97fe12dc2fc6312, type: 3}
+  indicePropiedadElegida: 0
+--- !u!114 &7962623792927839574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6501862549949007281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e6eb9164b74eff439b5741a99e0f7d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ColisionesBolas
+  registroColision: {fileID: 4296083146989496463}
+  detectoSuelo: 0
 --- !u!23 &8188322067710856561
 MeshRenderer:
   m_ObjectHideFlags: 0

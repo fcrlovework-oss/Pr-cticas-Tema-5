@@ -7,11 +7,17 @@ public class InstanciarPrefabs : MonoBehaviour
     //Aqui intanciamos bolas en el campo, en una zona aleatoria.
     //ATRIBUTOS: -----------------------------------
 
+    //Atributos para registro de datos:
+    public DataKPIPiscinaBolas KPIBolasTotales;
+
     //Atributos para las bolas:
     public GameObject prefabBola;
     private Vector3 posicionAleatoria;
     private GameObject BolaActual;
     private PropiedadesBolas metodoBola;
+    [HideInInspector]
+    public bool AceleracionInstancias;
+  
 
     //Atributos para guardar las bolas:
     public List<GameObject> BolasPropiedadBurbuja = new List<GameObject>();
@@ -21,9 +27,10 @@ public class InstanciarPrefabs : MonoBehaviour
     public List<GameObject> BolasPropiedadMovimientoExtra = new List<GameObject>();
     public List<GameObject> BolasPropiedadGameOver = new List<GameObject>();
     public List<GameObject> BolasTotales = new List<GameObject>();
+       
 
     //MÉTODOS BÁSICOS: -------------------------------------
-    
+
     private void Start()
     {
         StartCoroutine(AparicionBolas());
@@ -49,8 +56,13 @@ public class InstanciarPrefabs : MonoBehaviour
         {
             posicionAleatoria = new Vector3(Random.Range (-7.41f, 6.07f), Random.Range(1.24f, 5f), Random.Range(-8.21f, 7.57f));
             BolaActual = Instantiate(prefabBola, posicionAleatoria, Quaternion.identity);
+            if (KPIBolasTotales != null) KPIBolasTotales.DatoRecibidoBasico();
             AsociandoAListas();
-            yield return new WaitForSeconds(Random.Range(1f, 3f));
+            if(AceleracionInstancias) //esta variable se activa desde una de las propiedades.
+            {
+                yield return new WaitForSeconds(1f);
+            }                       
+            else yield return new WaitForSeconds(Random.Range(1f, 3f));
         }
     }
 

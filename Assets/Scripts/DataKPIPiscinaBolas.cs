@@ -1,10 +1,10 @@
 using UnityEngine;
 
-enum KPIType
+public enum TipoKPI
 {
     BolasTotalesKPI,
     ColisionesTotalesBolasKPI,
-    DineroMaximoGenerado,
+    //DineroMaximoGenerado,
 
     BolasPropiedadBurbujaKPI,
     BolasPropiedadExplosionKPI,
@@ -13,15 +13,39 @@ enum KPIType
     BolasPropiedadMovimientoExtraKPI,
     BolasPropiedadGameOverKPI,
 
-    BolasAfectadasBurbujaKPI,
-    BolasAfectadasExplosionKPI,
-    BolasAfectadasAceleracionKPI,
-    BolasAfectadasBotarKPI,
-    BolasAfectadasMovimientoExtraKPI,
-    BolasAfectadasGameOverKPI,
+    //BolasAfectadasBurbujaKPI,
+    //BolasAfectadasExplosionKPI,
+    //BolasAfectadasAceleracionKPI,
+    //BolasAfectadasBotarKPI,
+    //BolasAfectadasMovimientoExtraKPI,
+    //BolasAfectadasGameOverKPI,
 
 }
 public class DataKPIPiscinaBolas : MonoBehaviour
 {
+    public TipoKPI datoRecogido;
+    private DataControllerPiscinaBolas archivoDatos;
 
+    private void Awake()
+    {
+        archivoDatos = FindFirstObjectByType<DataControllerPiscinaBolas>();
+    }
+
+    public void DatoRecibidoBasico()
+    {
+        if (archivoDatos != null)
+        {
+            Debug.Log("Dato recibido: " + datoRecogido);
+            archivoDatos.TomaDeDatosBasicos(datoRecogido);
+        }
+    }
+
+    public void DatoRecibidoPropiedad(TipoKPI datoEnum)
+    {
+        if (archivoDatos != null)
+        {
+            Debug.Log("Dato recibido: " + datoEnum);
+            archivoDatos.TomaDeDatosPropiedades(datoEnum);
+        }
+    }
 }

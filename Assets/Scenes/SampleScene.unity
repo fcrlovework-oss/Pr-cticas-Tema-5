@@ -428,6 +428,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 793325654}
+  - component: {fileID: 793325656}
+  - component: {fileID: 793325655}
   - component: {fileID: 793325653}
   m_Layer: 0
   m_Name: InputController
@@ -448,7 +450,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a83cd866dd2240f41b8935eacba4b796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InstanciarPrefabs
+  KPIBolasTotales: {fileID: 793325656}
   prefabBola: {fileID: 6501862549949007281, guid: c3f0a71928b00fc4891803e2fe004eab, type: 3}
+  AceleracionInstancias: 0
+  BolasPropiedadBurbuja: []
+  BolasPropiedadExplosion: []
+  BolasPropiedadAceleracionCreacionBolas: []
+  BolasPropiedadBotar: []
+  BolasPropiedadMovimientoExtra: []
+  BolasPropiedadGameOver: []
+  BolasTotales: []
 --- !u!4 &793325654
 Transform:
   m_ObjectHideFlags: 0
@@ -464,6 +475,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &793325655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793325652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e70e0ac60c4563347acbeaf8fb89764f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataController
+  bucket:
+    CountBolasTotalesKPI: 0
+    CountColisionesTotalesBolasKPI: 0
+    CountBolasPropiedadBurbujaKPI: 0
+    CountBolasPropiedadExplosionKPI: 0
+    CountBolasPropiedadAceleracionKPI: 0
+    CountBolasPropiedadBotarKPI: 0
+    CountBolasPropiedadMovimientoExtraKPI: 0
+    CountBolasPropiedadGameOverKPI: 0
+--- !u!114 &793325656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793325652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948e56c958c6129458522c97558c445f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DataKPIPiscinaBolas
+  datoRecogido: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,7 +1020,7 @@ GameObject:
   - component: {fileID: 1777792991}
   m_Layer: 0
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: suelo
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

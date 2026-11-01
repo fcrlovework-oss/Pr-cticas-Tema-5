@@ -10,17 +10,12 @@ public class InstanciarPrefabs : MonoBehaviour
     //Atributos para registro de datos:
     public DataKPIPiscinaBolas KPIBolasTotales;
 
-    //Atributos para las bolas:
+    //Atributos Públicos:
     [HideInInspector]
     public bool AceleracionInstancias;
     [HideInInspector]
     public GameObject prefabBola;
-    private Vector3 posicionAleatoria;
-    private GameObject BolaActual;
-    private PropiedadesBolas metodoBola;
-  
 
-    //Atributos para guardar las bolas:
     public List<GameObject> BolasPropiedadBurbuja = new List<GameObject>();
     public List<GameObject> BolasPropiedadExplosion = new List<GameObject>();
     public List<GameObject> BolasPropiedadAceleracionCreacionBolas = new List<GameObject>();
@@ -28,6 +23,15 @@ public class InstanciarPrefabs : MonoBehaviour
     public List<GameObject> BolasPropiedadMovimientoExtra = new List<GameObject>();
     public List<GameObject> BolasPropiedadGameOver = new List<GameObject>();
     public List<GameObject> BolasTotales = new List<GameObject>();
+
+    //Atributos Privados:
+    private GameObject BolaActual;
+    private Vector3 posicionAleatoria;
+    private PropiedadesBolas metodoBola;
+
+
+
+    //Atributos para guardar las bolas:
 
        
 
@@ -37,7 +41,8 @@ public class InstanciarPrefabs : MonoBehaviour
     {
         StartCoroutine(AparicionBolas());
     }
-        
+
+
     //MÉTODOS AVANZADOS: -------------------------------------
     private void AsociandoAListas()
     {
@@ -62,17 +67,19 @@ public class InstanciarPrefabs : MonoBehaviour
         BolasTotales.Remove(bolaDestruida);
     }
 
+   
+
     //CORRUTINAS: -------------------------------------
     IEnumerator AparicionBolas()
     {
-        while(true)
+        while (true)
         {
-            posicionAleatoria = new Vector3(Random.Range (-7.41f, 6.07f), Random.Range(1.24f, 5f), Random.Range(-8.21f, 7.57f));
+            posicionAleatoria = new Vector3(Random.Range(-7.41f, 6.07f), Random.Range(1.24f, 5f), Random.Range(-8.21f, 7.57f));
 
             BolaActual = Instantiate(prefabBola, posicionAleatoria, Quaternion.identity);
             if (KPIBolasTotales != null) KPIBolasTotales.DatoRecibidoBasico();
             AsociandoAListas();
-            if(AceleracionInstancias) //esta variable se activa desde una de las propiedades.
+            if (AceleracionInstancias) //esta variable se activa desde una de las propiedades.
             {
                 yield return new WaitForSeconds(0f);
                 StartCoroutine(AceleracionBolas());
@@ -80,6 +87,11 @@ public class InstanciarPrefabs : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(Random.Range(1f, 3f));
+            }
+
+            while(BolasTotales.Count >= 30)
+            {
+                yield return null;
             }
         }
     }

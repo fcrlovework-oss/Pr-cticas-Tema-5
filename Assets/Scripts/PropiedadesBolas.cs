@@ -9,7 +9,6 @@ public class PropiedadesBolas : MonoBehaviour
 
     //Atributos privados Propiedades:
     private Action[] propiedades = new Action[6];
-    private Renderer colorVariable;
     private InstanciarPrefabs instanciacionBolas;
     private ColisionesBolas deteccionColisiones;
     private Rigidbody rbBola;
@@ -28,6 +27,7 @@ public class PropiedadesBolas : MonoBehaviour
     public GameObject explosionBotar;
     public GameObject explosionMovimientoExtra;
     public Action propiedadAsociada;
+    public Renderer colorVariable;
 
     //Atributos para registro de datos:
     private DataKPIPiscinaBolas KPIPropiedadesBolas;

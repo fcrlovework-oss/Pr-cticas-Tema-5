@@ -555,6 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 793325654}
   - component: {fileID: 793325658}
+  - component: {fileID: 793325659}
   - component: {fileID: 793325657}
   - component: {fileID: 793325656}
   - component: {fileID: 793325655}
@@ -663,6 +664,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GuardadoYCargaDatos
   guardar: 0
   rutaArchivo: 
+--- !u!114 &793325659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 793325652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30dfcfa15f61bf8468e8cb3974bd94aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CargaDeDatosPartida
+  cargarPartidaGuardada: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

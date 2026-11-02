@@ -9,6 +9,7 @@ public class InstanciarPrefabs : MonoBehaviour
 
     //Atributos para registro de datos:
     public DataKPIPiscinaBolas KPIBolasTotales;
+    private CargaDeDatosPartida anulacionTemporalInstancia;
 
     //Atributos Públicos:
     [HideInInspector]
@@ -24,6 +25,8 @@ public class InstanciarPrefabs : MonoBehaviour
     public List<GameObject> BolasPropiedadGameOver = new List<GameObject>();
     public List<GameObject> BolasTotales = new List<GameObject>();
 
+    public List<GameObject>[] listasTotales;
+
     //Atributos Privados:
     private GameObject BolaActual;
     private Vector3 posicionAleatoria;
@@ -31,29 +34,43 @@ public class InstanciarPrefabs : MonoBehaviour
 
 
 
-    //Atributos para guardar las bolas:
 
-       
+
 
     //MÉTODOS BÁSICOS: -------------------------------------
 
+    private void Awake()
+    {
+        listasTotales = new List<GameObject>[]
+        {
+            BolasPropiedadBurbuja,
+            BolasPropiedadExplosion,
+            BolasPropiedadAceleracionCreacionBolas,
+            BolasPropiedadBotar,
+            BolasPropiedadMovimientoExtra,
+            BolasPropiedadGameOver,
+            BolasTotales,
+        };
+        anulacionTemporalInstancia = FindFirstObjectByType<CargaDeDatosPartida>();
+    }
+
     private void Start()
     {
-        StartCoroutine(AparicionBolas());
+        if(anulacionTemporalInstancia.cargarPartidaGuardada == false) StartCoroutine(AparicionBolas());
     }
 
 
     //MÉTODOS AVANZADOS: -------------------------------------
-    private void AsociandoAListas()
+    public void AsociandoAListas(GameObject bola)
     {
-        metodoBola = BolaActual.GetComponent<PropiedadesBolas>();
-        BolasTotales.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 0) BolasPropiedadBurbuja.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 1) BolasPropiedadExplosion.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 2) BolasPropiedadAceleracionCreacionBolas.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 3) BolasPropiedadBotar.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 4) BolasPropiedadMovimientoExtra.Add(BolaActual);
-        if (metodoBola.indicePropiedadElegida == 5) BolasPropiedadGameOver.Add(BolaActual);
+        metodoBola = bola.GetComponent<PropiedadesBolas>();
+        BolasTotales.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 0) BolasPropiedadBurbuja.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 1) BolasPropiedadExplosion.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 2) BolasPropiedadAceleracionCreacionBolas.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 3) BolasPropiedadBotar.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 4) BolasPropiedadMovimientoExtra.Add(bola);
+        if (metodoBola.indicePropiedadElegida == 5) BolasPropiedadGameOver.Add(bola);
     }
 
     public void EliminacionBolasListas(GameObject bolaDestruida)
@@ -78,7 +95,7 @@ public class InstanciarPrefabs : MonoBehaviour
 
             BolaActual = Instantiate(prefabBola, posicionAleatoria, Quaternion.identity);
             if (KPIBolasTotales != null) KPIBolasTotales.DatoRecibidoBasico();
-            AsociandoAListas();
+            AsociandoAListas(BolaActual);
             if (AceleracionInstancias) //esta variable se activa desde una de las propiedades.
             {
                 yield return new WaitForSeconds(0f);

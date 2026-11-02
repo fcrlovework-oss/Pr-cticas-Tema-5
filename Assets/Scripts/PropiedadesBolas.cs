@@ -11,15 +11,17 @@ public class PropiedadesBolas : MonoBehaviour
     private Action[] propiedades = new Action[6];
     private InstanciarPrefabs instanciacionBolas;
     private ColisionesBolas deteccionColisiones;
-    private Rigidbody rbBola;
+    private VidaYRecompensas ajustesVidaYmonedas;
 
     //Atributos publicos Propiedades:
+    [HideInInspector]
+    public Rigidbody rbBola;
     [HideInInspector]
     public int indicePropiedadElegida;
     [HideInInspector]
     public bool finAceleracion;
     [HideInInspector]
-    public int? indicePropiedadContraida = null;
+    public int indicePropiedadContraida = -1;
     public GameObject explosionBurbujas;
     public GameObject explosionGameOvers;
     public GameObject explosionExplosion;
@@ -31,6 +33,7 @@ public class PropiedadesBolas : MonoBehaviour
 
     //Atributos para registro de datos:
     private DataKPIPiscinaBolas KPIPropiedadesBolas;
+    private CargaDeDatosPartida AnulacionStartCarga;
    
 
     //MÉTODOS BÁSICOS: -------------------------------------
@@ -41,11 +44,16 @@ public class PropiedadesBolas : MonoBehaviour
         KPIPropiedadesBolas = GetComponent <DataKPIPiscinaBolas>();
         deteccionColisiones = GetComponent <ColisionesBolas>();
         colorVariable = GetComponent<Renderer>();
-        AsignacionDePropiedades();
+        ajustesVidaYmonedas = FindFirstObjectByType<VidaYRecompensas>();
+        AnulacionStartCarga = FindFirstObjectByType<CargaDeDatosPartida>();
+        if(AnulacionStartCarga.cargarPartidaGuardada == false)
+        {
+            AsignacionDePropiedades();
+            TamañoYColor();
+        }
     }
     private void Start()
     {
-        TamañoYColor();
     }
 
     private void Update()
@@ -181,9 +189,10 @@ public class PropiedadesBolas : MonoBehaviour
             {
                 if(hit.rigidbody == rbBola)
                 {
-                    Debug.Log("Has perdido una vida y 20 monedas, te quedan " + VidaYRecompensas.vidaJuego + " vidas y " + VidaYRecompensas.dineroJuego);
                     VidaYRecompensas.vidaJuego--;
                     VidaYRecompensas.dineroJuego -= 20;
+                    ajustesVidaYmonedas.AjusteVidasYMonedas();
+                    Debug.Log("Has perdido una vida y 20 monedas, te quedan " + VidaYRecompensas.vidaJuego + " vidas y " + VidaYRecompensas.dineroJuego + " monedas");
                     PropiedadExplosion();
                 }
             }

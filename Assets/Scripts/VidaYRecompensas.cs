@@ -23,16 +23,11 @@ public class VidaYRecompensas : MonoBehaviour
 
     private void Update()
     {
-        if (vidaJuego <= 0) Moriste();
-        if (dineroJuego < 0) dineroJuego = 0;
-        if (dineroJuego >= 100) Ganaste();
+        AjusteVidasYMonedas();
         DeteccionBola();
     }
 
-
-
     //MÉTODOS AVANZADOS: -------------------------------------
-
     void DeteccionBola()
     {
         if (Input.GetMouseButtonDown(0))
@@ -67,6 +62,13 @@ public class VidaYRecompensas : MonoBehaviour
             lecturaBolas.PropiedadExplosion();
         }
         Debug.Log("Tienes " + dineroJuego + " monedas.");
+    }
+
+    public void AjusteVidasYMonedas()
+    {
+        if (vidaJuego <= 0) Moriste();
+        if (dineroJuego < 0) dineroJuego = 0;
+        if (dineroJuego >= 100) Ganaste();
     }
 
     void Moriste()

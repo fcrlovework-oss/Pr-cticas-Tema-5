@@ -23,44 +23,26 @@ public class VidaYRecompensas : MonoBehaviour
     private void Update()
     {
         AjusteVidasYMonedas();
-        DeteccionBola();
     }
 
     //MÉTODOS AVANZADOS: -------------------------------------
-    void DeteccionBola()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit))
-            {
-                if(hit.collider.CompareTag("bola"))
-                {
-                    lecturaBolas = hit.collider.gameObject.GetComponent<PropiedadesBolas>();
-                    Recompensas(lecturaBolas);
-                }
-            }
-        }
-    }
-
     public void Recompensas(PropiedadesBolas propiedad)
     {
         if(propiedad.indicePropiedadElegida == 0 || propiedad.indicePropiedadElegida == 3 || propiedad.indicePropiedadElegida == 4) //burbuja, Botar, movimientoExtra
         {
             dineroJuego += 10;
-            Debug.Log("¡Has ganado 10 monedas!");
+            if (propiedad.indicePropiedadElegida == 0) Debug.Log("¡Esta bola tenía la propiedad Burbuja!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
+            if (propiedad.indicePropiedadElegida == 3) Debug.Log("¡Esta bola tenía la propiedad Botar!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
+            if (propiedad.indicePropiedadElegida == 4) Debug.Log("¡Esta bola tenía la propiedad Movimineto Aleatorio!, ¡Ganaste 10 monedas!, te quedan " + dineroJuego + ".");
             propiedad.PropiedadExplosion();
         }
 
         if (propiedad.indicePropiedadElegida == 1) //Explosion
         {
             dineroJuego -= 5;
-            Debug.Log("Perdiste 5 monedas...");
+            Debug.Log("¡Esta bola tenía la propiedad Explosión!, perdiste 5 monedas... te quedan " + dineroJuego + ".");
             propiedad.PropiedadExplosion();
         }
-        Debug.Log("Tienes " + dineroJuego + " monedas.");
     }
 
     public void AjusteVidasYMonedas()

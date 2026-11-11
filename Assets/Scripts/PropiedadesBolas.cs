@@ -56,8 +56,6 @@ public class PropiedadesBolas : MonoBehaviour
     private void Update()
     {
         AfeccionPropiedades();
-        if(propiedadAsociada == AceleracionCreacionBolas) AceleracionCreacionBolas();
-        if(propiedadAsociada == GameOver) GameOver();
     }
 
     //MÉTODOS AVANZADOS: -------------------------------------
@@ -129,30 +127,15 @@ public class PropiedadesBolas : MonoBehaviour
     }
 
     //acelera el tiempo de creacion de bolas cuando pulsas sobre ella.
-    void AceleracionCreacionBolas()
+    public void AceleracionCreacionBolas()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (instanciacionBolas.AceleracionInstancias != true)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
-            {
-                if(hit.rigidbody == rbBola)
-                {
-                    if(instanciacionBolas.AceleracionInstancias != true)
-                    { 
-                        instanciacionBolas.AceleracionInstancias = true;
-                    }
-                }
-            }
-        }
-        if (finAceleracion)
-        {
-            PropiedadExplosion();
+            instanciacionBolas.AceleracionInstancias = true;
+            Debug.Log("Esta Bola tenia la propiedad Aceleracion, conseguiste mas bolas pero has perdido 15 monedas.");
             VidaYRecompensas.dineroJuego -= 15;
-            Debug.Log("Perdiste 15 monedas...");
-        }
-            
+            PropiedadExplosion();
+        }            
     }
 
     //hace botar la bola un tiempo:
@@ -176,24 +159,13 @@ public class PropiedadesBolas : MonoBehaviour
     }
 
     //si pulsas esta bola sin querer, pierdes una vida y hará explotar todas las bolas de la piscina, cuando tus vidas lleguen a cero, se acaba el juego.
-    void GameOver()
+    public void GameOver()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if(Physics.Raycast(ray, out hit))
-            {
-                if(hit.rigidbody == rbBola)
-                {
-                    VidaYRecompensas.vidaJuego--;
-                    VidaYRecompensas.dineroJuego -= 20;
-                    ajustesVidaYmonedas.AjusteVidasYMonedas();
-                    Debug.Log("Has perdido una vida y 20 monedas, te quedan " + VidaYRecompensas.vidaJuego + " vidas y " + VidaYRecompensas.dineroJuego + " monedas");
-                    PropiedadExplosion();
-                }
-            }
-        }
+        VidaYRecompensas.vidaJuego--;
+        VidaYRecompensas.dineroJuego -= 20;
+        ajustesVidaYmonedas.AjusteVidasYMonedas();
+        Debug.Log("Has perdido una vida y 20 monedas, te quedan " + VidaYRecompensas.vidaJuego + " vidas y " + VidaYRecompensas.dineroJuego + " monedas");
+        PropiedadExplosion();
     }
 
 }

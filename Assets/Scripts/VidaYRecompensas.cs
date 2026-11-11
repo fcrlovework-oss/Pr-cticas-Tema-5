@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class VidaYRecompensas : MonoBehaviour
 {
@@ -40,26 +39,26 @@ public class VidaYRecompensas : MonoBehaviour
                 if(hit.collider.CompareTag("bola"))
                 {
                     lecturaBolas = hit.collider.gameObject.GetComponent<PropiedadesBolas>();
-                    Recompensas();
+                    Recompensas(lecturaBolas);
                 }
             }
         }
     }
 
-    void Recompensas()
+    public void Recompensas(PropiedadesBolas propiedad)
     {
-        if(lecturaBolas.indicePropiedadElegida == 0 || lecturaBolas.indicePropiedadElegida == 3 || lecturaBolas.indicePropiedadElegida == 4) //burbuja, Botar, movimientoExtra
+        if(propiedad.indicePropiedadElegida == 0 || propiedad.indicePropiedadElegida == 3 || propiedad.indicePropiedadElegida == 4) //burbuja, Botar, movimientoExtra
         {
             dineroJuego += 10;
             Debug.Log("¡Has ganado 10 monedas!");
-            lecturaBolas.PropiedadExplosion();
+            propiedad.PropiedadExplosion();
         }
 
-        if (lecturaBolas.indicePropiedadElegida == 1) //Explosion
+        if (propiedad.indicePropiedadElegida == 1) //Explosion
         {
             dineroJuego -= 5;
             Debug.Log("Perdiste 5 monedas...");
-            lecturaBolas.PropiedadExplosion();
+            propiedad.PropiedadExplosion();
         }
         Debug.Log("Tienes " + dineroJuego + " monedas.");
     }

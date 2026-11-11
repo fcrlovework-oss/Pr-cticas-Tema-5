@@ -52,10 +52,7 @@ public class PropiedadesBolas : MonoBehaviour
             TamañoYColor();
         }
     }
-    private void Start()
-    {
-    }
-
+    
     private void Update()
     {
         AfeccionPropiedades();

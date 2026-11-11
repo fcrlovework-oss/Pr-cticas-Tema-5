@@ -9,16 +9,10 @@ public class ColisionesBolas : MonoBehaviour
     //Atributos para colisiones bolas:
     private PropiedadesBolas datosBolaActual;
     private PropiedadesBolas datosBolaChocada;
-    private InstanciarPrefabs datosBolaDestruida;
-
     private int indicePropiedad;
 
     [HideInInspector]
     public bool detectoSuelo;
-
-
-    //int conteoColisiones;
-
 
     //MÉTODOS BÁSICOS: -------------------------------------
 
@@ -36,17 +30,8 @@ public class ColisionesBolas : MonoBehaviour
     {
         if(collision.gameObject.tag == "bola")
         {
-            //if(gameObject.GetInstanceID() < collision.gameObject.GetInstanceID())
-            //{
-            //    conteoColisiones++;
-            //    Debug.Log("Hubo :" + conteoColisiones + " colisiones.");
-            //    if (registroColision != null) registroColision.DatoRecibidoBasico();
-            //}
-
             datosBolaChocada = collision.gameObject.GetComponent<PropiedadesBolas>();
             EfectoPropiedades();
-            //datosBolaChocada.indicePropiedadContraida = indicePropiedad;
-
         }
 
         if (collision.gameObject.tag == "suelo")

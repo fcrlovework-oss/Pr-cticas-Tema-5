@@ -1,10 +1,10 @@
 {
-    "CountBolasTotalesKPI": 95,
+    "CountBolasTotalesKPI": 58,
     "CountColisionesTotalesBolasKPI": 0,
-    "CountBolasPropiedadBurbujaKPI": 13,
-    "CountBolasPropiedadExplosionKPI": 19,
-    "CountBolasPropiedadAceleracionKPI": 18,
-    "CountBolasPropiedadBotarKPI": 14,
-    "CountBolasPropiedadMovimientoExtraKPI": 18,
-    "CountBolasPropiedadGameOverKPI": 14
+    "CountBolasPropiedadBurbujaKPI": 11,
+    "CountBolasPropiedadExplosionKPI": 9,
+    "CountBolasPropiedadAceleracionKPI": 12,
+    "CountBolasPropiedadBotarKPI": 8,
+    "CountBolasPropiedadMovimientoExtraKPI": 10,
+    "CountBolasPropiedadGameOverKPI": 9
 }

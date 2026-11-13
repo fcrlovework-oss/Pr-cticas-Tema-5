@@ -31,9 +31,18 @@ public class VidaYRecompensas : MonoBehaviour
         if(propiedad.indicePropiedadElegida == 0 || propiedad.indicePropiedadElegida == 3 || propiedad.indicePropiedadElegida == 4) //burbuja, Botar, movimientoExtra
         {
             dineroJuego += 10;
-            if (propiedad.indicePropiedadElegida == 0) Debug.Log("¡Esta bola tenía la propiedad Burbuja!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
-            if (propiedad.indicePropiedadElegida == 3) Debug.Log("¡Esta bola tenía la propiedad Botar!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
-            if (propiedad.indicePropiedadElegida == 4) Debug.Log("¡Esta bola tenía la propiedad Movimineto Aleatorio!, ¡Ganaste 10 monedas!, te quedan " + dineroJuego + ".");
+            if (propiedad.indicePropiedadElegida == 0)
+            {     
+                Debug.Log("¡Esta bola tenía la propiedad Burbuja!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
+            }
+            else if(propiedad.indicePropiedadElegida == 3)
+            {       
+                    Debug.Log("¡Esta bola tenía la propiedad Botar!, ¡Ganaste 10 monedas!" + dineroJuego + ".");
+            }
+            else if(propiedad.indicePropiedadElegida == 4)
+            { 
+                    Debug.Log("¡Esta bola tenía la propiedad Movimiento Aleatorio!, ¡Ganaste 10 monedas!, te quedan " + dineroJuego + ".");
+            }
             propiedad.PropiedadExplosion();
         }
 

@@ -26,15 +26,7 @@ public class Disparo : MonoBehaviour
     {
         BalaCreada = Instantiate(bala, puntoDeTiro.position, Quaternion.identity);
         BalaCreada.GetComponent<Rigidbody>().AddForce(puntoDeTiro.right * 70f, ForceMode.Impulse);
-        StartCoroutine(DestruccionBala());
-    }
-    #endregion
-
-    #region Corrutinas:
-    IEnumerator DestruccionBala()
-    {
-        yield return new WaitForSeconds(4f);
-        if (BalaCreada != null) Destroy(BalaCreada);
+        if (BalaCreada != null) Destroy(BalaCreada, 4f);
     }
     #endregion
 }

@@ -1,10 +1,11 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Energia : MonoBehaviour
 {
-	#region Atributos Públicos:
-	public int EnergiaActual { 
+    #region Atributos Públicos:
+    public int EnergiaActual { 
 		get //get muestra lo que se va a leer al llamar a la variable
 		{ 
 			return _energiaActual;
@@ -30,38 +31,62 @@ public class Energia : MonoBehaviour
 
 	#region Atributos Privados:
 	[SerializeField] private int _energiaMaxima = 100;
-	private int _energiaActual;
+    [SerializeField] private int _energiaActual;
 	private bool _die = false;
     #endregion
 
     #region Métodos Básicos:
     private void Start()
     {
-		EnergiaActual = _energiaMaxima;
+		EnergiaActual = _energiaMaxima;		
+    }
 
-		//Listener, asi te suscribes al evento:
-		AlAumentarEnergia += () => Debug.Log("Energia: " + EnergiaActual);
-        AlMorir += () => Debug.Log("¡Has muerto!");
-
-		AumentoEnergia(10);
+    private void Update()
+    {
+        if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
+        {
+            AumentoEnergia(20);
+        }
+        else if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            Reduccionenergia(30);
+        }
     }
     #endregion
 
     #region Métodos Personalizados Públicos:
     public void AumentoEnergia(int energia)
 	{
-		EnergiaActual += energia;
+        if (energia < 0)
+        {
+            Debug.LogError("¡Se ha detectado un valor negativo al aumentar energía!");
+        }
+        else if(!_die)
+        {
+            EnergiaActual += energia;
 
-		//Evento Emisor:
-		AlAumentarEnergia?.Invoke();
+            //Evento Emisor:
+            AlAumentarEnergia?.Invoke();
+        }
     }
 
 	public void Reduccionenergia(int energia)
 	{
-        EnergiaActual -= energia;
+        if (energia < 0)
+        {
+            Debug.LogError("¡Se ha detectado un valor negativo al reducir energía!");
+        }
+        else if (!_die)
+        {
+            EnergiaActual -= energia;
 
-        //Evento Emisor:
-        AlReducirEnergia?.Invoke();
+            //Evento Emisor:
+            AlReducirEnergia?.Invoke();
+        }
+
+        
+
+
     }
     #endregion
 

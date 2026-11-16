@@ -36,7 +36,7 @@ public class Monedas : MonoBehaviour
 	{
 		if (monedas < 0)
 		{
-			Debug.LogError("¡Se ha detectado un valor negativo o nulo  al intentar gastar Monedas!");
+			Debug.LogError("¡Se ha detectado un valor negativo al intentar gastar Monedas!");
             return;
 		}
 
@@ -47,9 +47,9 @@ public class Monedas : MonoBehaviour
 
     public void GastarMonedas(int monedas)
     {
-        if (monedas <= 0)
+        if (monedas < 0)
         {
-            Debug.LogError("¡Se ha detectado un valor negativo o nulo  al intentar gastar Monedas!");
+            Debug.LogError("¡Se ha detectado un valor negativo al intentar gastar Monedas!");
             return;
         }
         MonedasTotales -= monedas;

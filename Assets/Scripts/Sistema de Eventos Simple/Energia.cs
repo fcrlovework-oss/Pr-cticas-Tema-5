@@ -39,19 +39,7 @@ public class Energia : MonoBehaviour
     private void Start()
     {
 		EnergiaActual = _energiaMaxima;		
-    }
-
-    private void Update()
-    {
-        if (Keyboard.current != null && Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            AumentoEnergia(20);
-        }
-        else if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            Reduccionenergia(30);
-        }
-    }
+    }  
     #endregion
 
     #region Métodos Personalizados Públicos:
@@ -69,7 +57,6 @@ public class Energia : MonoBehaviour
             AlAumentarEnergia?.Invoke();
         }
     }
-
 	public void Reduccionenergia(int energia)
 	{
         if (energia < 0)
@@ -82,11 +69,7 @@ public class Energia : MonoBehaviour
 
             //Evento Emisor:
             AlReducirEnergia?.Invoke();
-        }
-
-        
-
-
+        }       
     }
     #endregion
 

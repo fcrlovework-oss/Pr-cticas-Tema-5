@@ -1,18 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UIControles : MonoBehaviour
 {
-	#region Atributos Públicos:
-
-	#endregion
-
 	#region Atributos Privados:
 	[SerializeField] private Slider _barraDeEnergia;
-	#endregion
-
-	#region Métodos Básicos:
-
+	[SerializeField] private TextMeshProUGUI _textoPuntos;
+	[SerializeField] private TextMeshProUGUI _textoNiveles;
 	#endregion
 
 	#region Métodos Personalizados Públicos:
@@ -21,6 +16,13 @@ public class UIControles : MonoBehaviour
         _barraDeEnergia.value = energia;
 
     }
-
+	public void ActualizacionPuntos(int puntos)
+	{
+        _textoPuntos.text = puntos.ToString();
+    }
+	public void ActualizacionNivel(int nivel)
+	{
+        _textoNiveles.text = nivel.ToString();
+    }
 	#endregion
 }

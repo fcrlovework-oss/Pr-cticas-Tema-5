@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class SonidoControles : MonoBehaviour
 {
-    #region Atributos Públicos:
-
-    #endregion
-
     #region Atributos Privados:
     [SerializeField] private AudioClip _sonidoReduccionEnergia;
     [SerializeField] private AudioClip _sonidoAumentoEnergia;
@@ -31,16 +27,10 @@ public class SonidoControles : MonoBehaviour
         _reproductorDeSonido.clip = _sonidoAumentoEnergia;
         _reproductorDeSonido.Play();
     }
-
     public void SonidoMuerte()
     {
         _reproductorDeSonido.clip = _sonidoMuerte;
         _reproductorDeSonido.Play();
     }
-
-    #endregion
-
-    #region Métodos Personalizados Privados:
-
     #endregion
 }

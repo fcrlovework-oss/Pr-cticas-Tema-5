@@ -1,20 +1,23 @@
+using System;
 using UnityEngine;
 
-public class Armas : MonoBehaviour
+[Serializable]
+public class Armas : Item, IUsable
 {
     #region Atributos Públicos:
-
+    [field: SerializeField] public int Daño { get; set; }
 	#endregion
 
-	#region Atributos Privados:
+	#region Métodos Personalizados Públicos:
+    public void Ataque(int dañoEnergia)
+    {
 
-	#endregion
+    }
 
-	#region Métodos Básicos:
+    public void Usar()
+    {
+        Ataque(Daño);
+    }
 
-	#endregion
-
-	#region Métodos Personalizados:
-
-	#endregion
+	#endregion //Puedes lanzarla con un arco.
 }

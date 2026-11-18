@@ -240,6 +240,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba4ce47c7981474ab9f32964b00f277, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem
+  _armas:
+  - <Nombre>k__BackingField: Cuchillo
+    <Descripcion>k__BackingField: "Sirve para apu\xF1alar."
+    "<Da\xF1o>k__BackingField": 20
+  - <Nombre>k__BackingField: Flecha
+    <Descripcion>k__BackingField: Puedes lanzarla con un arco.
+    "<Da\xF1o>k__BackingField": 0
+  _comida:
+  - <Nombre>k__BackingField: Arroz
+    <Descripcion>k__BackingField: "Si lo tomas conseguir\xE1s reponer energ\xEDas."
+    <EnergiaAportada>k__BackingField: 30
+    <PrecioVenta>k__BackingField: 15
+  - <Nombre>k__BackingField: Tarta
+    <Descripcion>k__BackingField: "Esta riquisima, te sentir\xE1s como nuevo si la
+      comes."
+    <EnergiaAportada>k__BackingField: 50
+    <PrecioVenta>k__BackingField: 40
+  _otros:
+  - <Nombre>k__BackingField: "L\xE1piz"
+    <Descripcion>k__BackingField: Puedes usarlo para escribir o venderlo.
+    <PrecioVenta>k__BackingField: 10
+  - <Nombre>k__BackingField: Papel
+    <Descripcion>k__BackingField: "Podr\xE1s escribir en el con el l\xE1piz."
+    <PrecioVenta>k__BackingField: 10
   _items: []
 --- !u!4 &742409532
 Transform:

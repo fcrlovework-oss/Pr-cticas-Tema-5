@@ -1,20 +1,19 @@
+using System;
 using UnityEngine;
 
-public class Otros : MonoBehaviour
+[Serializable]
+public class Otros : Item, IVendible
 {
     #region Atributos Públicos:
+    [field: SerializeField] public int PrecioVenta { get; set; }
+    #endregion
 
-	#endregion
-
-	#region Atributos Privados:
-
-	#endregion
-
-	#region Métodos Básicos:
-
-	#endregion
-
-	#region Métodos Personalizados:
-
-	#endregion
+    #region Métodos Personalizados Públicos:
+    public float Venta()
+    {
+        Debug.Log("¡Ganaste " + PrecioVenta + " monedas");
+        return PrecioVenta;
+    }
+    #endregion
+    //
 }

@@ -2,24 +2,38 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class Comida : Item
+public class Comida : Item, IUsable, IVendible
 {
     #region Atributos Públicos:
     [field: SerializeField] public int EnergiaAportada { get; set; }
-	#endregion
+    [field: SerializeField] public int PrecioVenta { get; set; }
+    
+    #endregion
 
-	#region Atributos Privados:
+    #region Atributos Privados:
 
-	#endregion
+    #endregion
 
-	#region Métodos Básicos:
+    #region Métodos Básicos:
 
-	#endregion
+    #endregion
 
-	#region Métodos Personalizados Públicos:
-	public void AumentarEnergía()
+    #region Métodos Personalizados Públicos:
+    public void AumentarEnergía(int energia)
 	{
 		Debug.Log("Has recuperado energía.");
 	}
-	#endregion
+
+	public void Usar()
+	{
+		AumentarEnergía(EnergiaAportada);
+
+    }
+
+    public float Venta()
+	{
+        Debug.Log("¡Ganaste " + PrecioVenta + " monedas");
+        return PrecioVenta;
+    }
+    #endregion
 }

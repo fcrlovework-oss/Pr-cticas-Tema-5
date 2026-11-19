@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class Item 
+namespace Inventario
 {
-	#region Atributos Públicos:
-	[field: SerializeField] public string Nombre { get; set; }
-    [field: SerializeField] public string Descripcion { get; set; }
-	#endregion
+	[Serializable]
+	public class Item
+	{
+		#region Atributos Públicos:
+		[field: SerializeField] public string Nombre { get; set; }
+		[field: SerializeField] public string Descripcion { get; set; }
+		#endregion
 
-	#region Atributos Privados:
+		#region Atributos Privados:
 
-	#endregion
+		#endregion
 
-	#region Métodos Básicos:
+		#region Métodos Básicos:
 
-	#endregion
+		#endregion
 
-	#region Métodos Personalizados:
+		#region Métodos Personalizados:
 
-	#endregion
+		#endregion
+	}
 }

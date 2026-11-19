@@ -1,19 +1,22 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class Otros : Item, IVendible
+namespace Inventario
 {
-    #region Atributos Públicos:
-    [field: SerializeField] public int PrecioVenta { get; set; }
-    #endregion
-
-    #region Métodos Personalizados Públicos:
-    public float Venta()
+    [Serializable]
+    public class Otros : Item, IVendible
     {
-        Debug.Log("¡Ganaste " + PrecioVenta + " monedas");
-        return PrecioVenta;
+        #region Atributos Públicos:
+        [field: SerializeField] public int PrecioVenta { get; set; }
+        #endregion
+
+        #region Métodos Personalizados Públicos:
+        public float Venta()
+        {
+            Debug.Log("¡Ganaste " + PrecioVenta + " monedas");
+            return PrecioVenta;
+        }
+        #endregion
+        //
     }
-    #endregion
-    //
 }

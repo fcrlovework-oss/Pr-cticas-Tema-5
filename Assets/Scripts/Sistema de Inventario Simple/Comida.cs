@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace Inventario
 {
+    public interface IConsumible { }
+
     [Serializable]
-    public class Comida : Item, IUsable, IVendible
+    public class Comida : Item, IUsable, IVendible, IConsumible
     {
         #region Atributos Públicos:
         [field: SerializeField] public int EnergiaAportada { get; set; }

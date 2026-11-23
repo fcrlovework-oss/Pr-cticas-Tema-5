@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,81 +7,80 @@ namespace Inventario
     public class InventorySystem : MonoBehaviour
     {
         #region Atributos Públicos:
+        [Header("Lista Completa de Objetos")]
+        public List<Item> ItemsTotales = new List<Item>();
 
+        
+
+        //Eventos    
+        public event Action <ItemButton> AlSeleccionarItem;
+        public event Action AccionItemCompletada;
         #endregion
 
         #region Atributos Privados:
-        [Header("Referencias de UI")]
-        [SerializeField] private ItemButton _botonDelItem;
-        [SerializeField] private Transform _panelDeInventario;
-
         [Header("Arrays de Objectos")]
         [SerializeField] private Armas[] _armas;
         [SerializeField] private Comida[] _comida;
         [SerializeField] private Otros[] _otros;
 
-        [Header("Piscina de Objetos")]
-        [SerializeField] private List<Item> _items = new List<Item>();
-
         [Header("Item Seleccionado")]
-        [SerializeField] private Item _itemActualSeleccionado;
-
+        [SerializeField] private ItemButton ItemActualSeleccionado;
         #endregion
 
-        #region Métodos Básicos:
-        private void Start()
-        {
-            InicializandoItems();
-            InicializandoUI();
-        }
-
-
-        #endregion
-
-        #region Métodos Personalizados Privados:
-        private void InicializandoItems()
+        #region Métodos Personalizados Públicos:
+        public void InicializandoItems()
         {
             //Armas
             for (int i = 0; i < _armas.Length; i++)
             {
-                _items.Add(_armas[i]);
+                ItemsTotales.Add(_armas[i]);
             }
 
             //Comidas
             for (int i = 0; i < _comida.Length; i++)
             {
-                _items.Add(_comida[i]);
+                ItemsTotales.Add(_comida[i]);
             }
 
             //Otros
             for (int i = 0; i < _otros.Length; i++)
             {
-                _items.Add(_otros[i]);
+                ItemsTotales.Add(_otros[i]);
             }
         }
-        private void InicializandoUI()
+        public void AñadirItem(ItemButton ItemAAñadir, Transform panelInventario)
         {
-            for (int i = 0; i < _items.Count; i++)
+            ItemButton nuevoBotonDeItem = Instantiate(ItemAAñadir, panelInventario);
+            nuevoBotonDeItem.ObjetoActual = ItemAAñadir.ObjetoActual;
+            nuevoBotonDeItem.AlPulsarBoton += () => AlSeleccionarItem?.Invoke(nuevoBotonDeItem);
+        }
+
+        public void GuardandoItemSeleccionado(ItemButton item)
+        {
+            ItemActualSeleccionado = item;
+        }
+        public void UsandoObjetoActual()
+        {
+            (ItemActualSeleccionado.ObjetoActual as IUsable).Usar();
+            if (ItemActualSeleccionado.ObjetoActual is IConsumible)
             {
-                ItemButton nuevoBoton = Instantiate(_botonDelItem, _botonDelItem.transform.parent);
-                nuevoBoton.ObjetoActual = _items[i];
-                nuevoBoton.AlPulsarBoton += () => AñadirItem(nuevoBoton);
+                Consumir(ItemActualSeleccionado);
             }
-            _botonDelItem.gameObject.SetActive(false);
+        }
+        public void VendiendoObjetoActual()
+        {
+            (ItemActualSeleccionado.ObjetoActual as IVendible).Venta();
+            Destroy(ItemActualSeleccionado.gameObject);
+            AccionItemCompletada?.Invoke();
         }
         #endregion
 
-        #region Métodos Personalizados Públicos:
-        public void AñadirItem(ItemButton botonNuevo)
+        #region Métodos Personalizados Privados:
+        private void Consumir(ItemButton objetoSeleccionado)
         {
-            ItemButton nuevoItem = Instantiate(botonNuevo, _panelDeInventario);
-            nuevoItem.AlPulsarBoton += () => ItemSeleccionado(nuevoItem.ObjetoActual);
-        }
-
-        public void ItemSeleccionado(Item objetoActual)
-        {
-            _itemActualSeleccionado = objetoActual;
-            //LogicaControlDeBotones de acciones.
+            Destroy(objetoSeleccionado.gameObject);
+            objetoSeleccionado = null;
+            AccionItemCompletada?.Invoke();
         }
         #endregion
     }

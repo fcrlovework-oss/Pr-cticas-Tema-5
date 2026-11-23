@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemButton : MonoBehaviour
 {
-	#region Atributos Públicos:
+    #region Atributos Públicos:
     public Item ObjetoActual
     {
         get
@@ -37,12 +37,5 @@ public class ItemButton : MonoBehaviour
         _textoBoton = GetComponentInChildren<TextMeshProUGUI>();
         _boton.onClick.AddListener(() => AlPulsarBoton?.Invoke());
     }
-    #endregion
-
-    //minuto 12:39 video sistema de inventario parte 3.
-
-    #region Métodos Personalizados Públicos:
-  
-
     #endregion
 }

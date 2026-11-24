@@ -17,6 +17,7 @@ public class ItemButton : MonoBehaviour
         {
             _objetoActual = value;
             _textoBoton.text = ObjetoActual.Nombre;
+            _iconoItem.sprite = ObjetoActual.Icono;
 
         }
     }
@@ -28,6 +29,7 @@ public class ItemButton : MonoBehaviour
     private TextMeshProUGUI _textoBoton;
     private Item _objetoActual;
     private Button _boton;
+    private Image _iconoItem;
     #endregion
 
     #region Métodos Básicos:
@@ -35,6 +37,7 @@ public class ItemButton : MonoBehaviour
     {
         _boton = GetComponent<Button>();
         _textoBoton = GetComponentInChildren<TextMeshProUGUI>();
+        _iconoItem = transform.Find("Icono Item").GetComponentInChildren<Image>();
         _boton.onClick.AddListener(() => AlPulsarBoton?.Invoke());
     }
     #endregion

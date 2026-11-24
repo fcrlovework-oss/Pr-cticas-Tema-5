@@ -32,6 +32,7 @@ public class EventSystem : MonoBehaviour
         _inventario.AñadirItem(item, _ui._panelDeInventario);
         _ui.ApagandoBotonesAcciones();
     }
+
     private void AlSeleccionarItem(ItemButton objetoActual)
     {
         _inventario.GuardandoItemSeleccionado(objetoActual);
@@ -54,7 +55,9 @@ public class EventSystem : MonoBehaviour
         {
             _ui.Usable = false;
         }
+        //Comprobamos botones de accion y añadimos descripcion del objecto:
         _ui.ComprobacionBotones();
+        _ui.TextoDescripcionItem(objetoActual.ObjetoActual.Descripcion);
     }
     #endregion
 
@@ -63,10 +66,12 @@ public class EventSystem : MonoBehaviour
     {
         _inventario.VendiendoObjetoActual();
     }
+
     private void UsandoItem()
     {
         _inventario.UsandoObjetoActual();
     }
+
     private void AlCompletarAccionItems()
     {
         _ui.ApagandoBotonesAcciones();

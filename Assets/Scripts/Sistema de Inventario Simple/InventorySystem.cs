@@ -48,6 +48,7 @@ namespace Inventario
                 ItemsTotales.Add(_otros[i]);
             }
         }
+
         public void AñadirItem(ItemButton ItemAAñadir, Transform panelInventario)
         {
             ItemButton nuevoBotonDeItem = Instantiate(ItemAAñadir, panelInventario);
@@ -59,6 +60,7 @@ namespace Inventario
         {
             ItemActualSeleccionado = item;
         }
+
         public void UsandoObjetoActual()
         {
             (ItemActualSeleccionado.ObjetoActual as IUsable).Usar();
@@ -67,6 +69,7 @@ namespace Inventario
                 Consumir(ItemActualSeleccionado);
             }
         }
+
         public void VendiendoObjetoActual()
         {
             (ItemActualSeleccionado.ObjetoActual as IVendible).Venta();

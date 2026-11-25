@@ -10,8 +10,6 @@ namespace Inventario
         [Header("Lista Completa de Objetos")]
         public List<Item> ItemsTotales = new List<Item>();
 
-        
-
         //Eventos    
         public event Action <ItemButton> AlSeleccionarItem;
         public event Action AccionItemCompletada;
